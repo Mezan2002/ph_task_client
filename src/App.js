@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import Billings from "./Components/Billings/Billings";
-import TopBar from "./Components/TopBar/TopBar";
 import Main from "./Layout/Main/Main";
 
 function App() {
