@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import AddNewBillModal from "../AddNewBillModal/AddNewBillModal";
 
 const TopBar = () => {
+  const [modalToggle, setModalToggle] = useState(true);
   return (
     <div className="bg-black mt-2 rounded-md py-3">
       <div className="flex items-center px-8 justify-between">
@@ -13,8 +14,15 @@ const TopBar = () => {
             placeholder="Search by Full Name, Email, Phone Number"
           />
         </div>
-        <AddNewBillModal></AddNewBillModal>
-        <label htmlFor="addNewBillModal" className="btn">
+        <AddNewBillModal
+          modalToggle={modalToggle}
+          setModalToggle={setModalToggle}
+        ></AddNewBillModal>
+        <label
+          onClick={() => setModalToggle(true)}
+          htmlFor="addNewBillModal"
+          className="btn"
+        >
           Add New Bill
         </label>
       </div>
