@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Login = () => {
-  const handleLogin = (event) => {
+const Register = () => {
+  const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
@@ -13,8 +13,20 @@ const Login = () => {
     <div className="flex items-center justify-center min-h-screen">
       <div className="card w-[30%] bg-base-100 shadow-2xl">
         <div className="card-body">
-          <h2 className="text-center text-2xl font-medium">Login</h2>
-          <form onSubmit={handleLogin} className="mt-5">
+          <h2 className="text-center text-2xl font-medium">Register</h2>
+          <form onSubmit={handleRegister} className="mt-5">
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Full Name</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder=""
+                className="input input-bordered w-full"
+                required
+              />
+            </div>
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -39,16 +51,16 @@ const Login = () => {
                 required
               />
             </div>
-            <Link className="text-primary" to="/">
-              {" "}
-              Forget Password?{" "}
-            </Link>
-            <input type="submit" value="Login" className="btn btn-block mt-5" />
+            <input
+              type="submit"
+              value="Register"
+              className="btn btn-block mt-5"
+            />
           </form>
           <p className="text-center mt-3">
-            don't have an account?{" "}
-            <Link to="/register" className="text-primary">
-              register
+            already have an account?{" "}
+            <Link to="/login" className="text-primary">
+              login
             </Link>{" "}
           </p>
         </div>
@@ -57,4 +69,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

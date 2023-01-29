@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import Billings from "./Components/Billings/Billings";
 import Login from "./Components/Login/Login";
+import Register from "./Components/Register/Register";
 import Main from "./Layout/Main/Main";
 
 function App() {
@@ -20,6 +21,10 @@ function App() {
     {
       path: "/login",
       element: <Login></Login>,
+    },
+    {
+      path: "/register",
+      element: <Register></Register>,
     },
   ]);
   return (
