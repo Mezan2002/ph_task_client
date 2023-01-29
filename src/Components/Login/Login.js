@@ -1,60 +1,49 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
-import "./Login.css";
 
 const Login = () => {
-  const { setUser } = useContext(AuthContext);
-  const handleLogIn = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const userName = form.userName.value;
-    const userPassword = form.userPassword.value;
-    fetch(
-      `https://atg-server-tau.vercel.app/loggedInUser?userName=${userName}&userPassword=${userPassword}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setUser(data.userName);
-        if (data._id) {
-          console.log(data);
-          alert("Login Successfull!");
-        }
-      })
-      .catch((err) => {
-        alert("Wrong Username Or Password!");
-      });
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
   };
   return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/logIn">Login</Link>
-          </li>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
-        </ul>
-      </nav>
-      <div className="login">
-        <div>
-          <h2>Login</h2>
-          <form onSubmit={handleLogIn}>
-            <input type="text" name="userName" placeholder="User Name" />
-            <br />
-            <input
-              type="password"
-              name="userPassword"
-              placeholder="User Password"
-            />
-            <br />
-            <Link to="/forgotPass">Forgot Password?</Link>
-            <br />
-            <input type="submit" value="Log In" />
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="card w-[30%] bg-base-100 shadow-md">
+        <div className="card-body">
+          <h2 className="text-center text-2xl font-medium">Login</h2>
+          <form onSubmit={handleLogin} className="mt-5">
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder=""
+                className="input input-bordered w-full"
+                required
+              />
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <input
+                type="password"
+                name="password"
+                placeholder=""
+                className="input input-bordered w-full mb-5"
+                required
+              />
+            </div>
+            <Link className="text-primary" to="/">
+              {" "}
+              Forget Password?{" "}
+            </Link>
+            <input type="submit" value="Login" className="btn btn-block mt-5" />
           </form>
         </div>
       </div>
