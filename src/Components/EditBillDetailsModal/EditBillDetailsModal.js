@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
 
 const EditBillDetailsModal = ({ modalPrevData }) => {
+  console.log(modalPrevData);
   const {
     register,
     reset,
@@ -10,8 +10,9 @@ const EditBillDetailsModal = ({ modalPrevData }) => {
     formState: { errors },
   } = useForm();
   const formSubmit = (data) => {
-    fetch("http://localhost:5000/add-billing", {
-      method: "POST",
+    console.log(data);
+    fetch(`http://localhost:5000/update-billing/${modalPrevData._id}`, {
+      method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
@@ -19,11 +20,6 @@ const EditBillDetailsModal = ({ modalPrevData }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.acknowledged) {
-          reset();
-          //   setModalToggle(false);
-          toast.success("Bill added successfully!");
-        }
         console.log(data);
       });
   };

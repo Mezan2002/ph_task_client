@@ -10,12 +10,23 @@ const AddNewBillModal = ({ modalToggle, setModalToggle }) => {
     formState: { errors },
   } = useForm();
   const formSubmit = (data) => {
+    const fullName = data.fullName;
+    const email = data.email;
+    const phone = data.phone;
+    const payableAmount = data.payableAmount;
+    const formData = {
+      fullName,
+      email,
+      phone,
+      payableAmount,
+      createdTime: new Date().toISOString(),
+    };
     fetch("http://localhost:5000/add-billing", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(formData),
     })
       .then((res) => res.json())
       .then((data) => {
