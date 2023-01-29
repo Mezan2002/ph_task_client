@@ -1,6 +1,6 @@
 import React from "react";
 import { toast } from "react-hot-toast";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const handleRegister = (event) => {

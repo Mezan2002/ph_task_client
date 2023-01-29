@@ -1,8 +1,9 @@
 import React from "react";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -12,6 +13,8 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data._id) {
+          form.reset();
+          navigate("/");
           toast.success("Login Successfull!");
         }
       })
