@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { toast } from "react-hot-toast";
+import Loading from "../Loading/Loading";
 
 const BillingsTable = () => {
   const {
@@ -14,7 +16,30 @@ const BillingsTable = () => {
       return data;
     },
   });
-  console.log(billingList);
+
+  const handleEdit = (id) => {
+    console.log(id);
+  };
+  const handleDelete = (id) => {
+    const procced = window.confirm("Are you want to delete the bill details?");
+    if (procced === true) {
+      fetch(`http://localhost:5000/delete-billing/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount === 1) {
+            refetch();
+            toast.success("Billing Details Deleted Successfully!");
+          }
+        });
+    }
+  };
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+
   return (
     <div>
       <div className="overflow-x-auto mt-5">
@@ -38,8 +63,16 @@ const BillingsTable = () => {
                 <td>{bill.phone}</td>
                 <td>{bill.payableAmount}</td>
                 <td>
-                  <button className="btn btn-sm mr-2">Edit</button>
-                  <button className="btn btn-sm btn-error text-white">
+                  <button
+                    onClick={() => handleEdit(bill._id)}
+                    className="btn btn-sm mr-2"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(bill._id)}
+                    className="btn btn-sm btn-error text-white"
+                  >
                     Delete
                   </button>
                 </td>
