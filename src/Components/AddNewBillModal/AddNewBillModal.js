@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 const AddNewBillModal = () => {
   const {
@@ -8,7 +9,20 @@ const AddNewBillModal = () => {
     formState: { errors },
   } = useForm();
   const formSubmit = (data) => {
-    console.log(data);
+    fetch("http://localhost:5000/add-billing", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Bill added successfully!");
+        }
+        console.log(data);
+      });
   };
   return (
     <div>
