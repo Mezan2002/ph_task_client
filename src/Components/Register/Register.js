@@ -1,13 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { Link, Navigate } from "react-router-dom";
 
 const Register = () => {
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
+    const fullName = form.fullName.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    const userData = { fullName, email, password };
+
+    fetch("http://localhost:5000/registration", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          form.reset();
+          toast.success("User Created Successfully!");
+        }
+      });
   };
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -21,7 +38,7 @@ const Register = () => {
               </label>
               <input
                 type="text"
-                name="name"
+                name="fullName"
                 placeholder=""
                 className="input input-bordered w-full"
                 required

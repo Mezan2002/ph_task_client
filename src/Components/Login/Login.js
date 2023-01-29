@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -7,7 +8,16 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    fetch(`http://localhost:5000/login?email=${email}&password=${password}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data._id) {
+          toast.success("Login Successfull!");
+        }
+      })
+      .catch((err) => {
+        toast.error("Wrong Username Or Password!");
+      });
   };
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -39,10 +49,6 @@ const Login = () => {
                 required
               />
             </div>
-            <Link className="text-primary" to="/">
-              {" "}
-              Forget Password?{" "}
-            </Link>
             <input type="submit" value="Login" className="btn btn-block mt-5" />
           </form>
           <p className="text-center mt-3">
