@@ -1,4 +1,5 @@
 import React from "react";
+import AddNewBillModal from "../AddNewBillModal/AddNewBillModal";
 
 const TopBar = () => {
   return (
@@ -12,33 +13,10 @@ const TopBar = () => {
             placeholder="Search by Full Name, Email, Phone Number"
           />
         </div>
-        <div>
-          <input
-            type="checkbox"
-            id="addNewBillModal"
-            className="modal-toggle"
-          />
-          <div className="modal">
-            <div className="modal-box relative">
-              <label
-                htmlFor="addNewBillModal"
-                className="btn btn-sm btn-circle absolute right-2 top-2"
-              >
-                ✕
-              </label>
-              <h3 className="text-lg font-bold">
-                Congratulations random Internet user!
-              </h3>
-              <p className="py-4">
-                You've been selected for a chance to get one year of
-                subscription to use Wikipedia for free!
-              </p>
-            </div>
-          </div>
-          <label htmlFor="addNewBillModal" className="btn">
-            Add New Bill
-          </label>
-        </div>
+        <AddNewBillModal></AddNewBillModal>
+        <label htmlFor="addNewBillModal" className="btn">
+          Add New Bill
+        </label>
       </div>
     </div>
   );
