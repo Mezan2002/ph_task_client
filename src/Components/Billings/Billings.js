@@ -7,6 +7,7 @@ import TopBar from "../TopBar/TopBar";
 
 const Billings = ({ user }) => {
   const [modalPrevData, setModalPrevData] = useState(null);
+  const [search, setSearch] = useState("");
   const [activePage, setActivePage] = useState(0);
   const [dataPerPage] = useState(10);
   const {
@@ -17,7 +18,7 @@ const Billings = ({ user }) => {
     queryKey: ["billing-list", activePage, dataPerPage],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/billing-list?activePage=${activePage}&dataPerPage=${dataPerPage}`,
+        `http://localhost:5000/billing-list?activePage=${activePage}&dataPerPage=${dataPerPage}&search=${search}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("token")}`,
@@ -32,7 +33,11 @@ const Billings = ({ user }) => {
     <div className="mx-24">
       {user ? (
         <>
-          <TopBar refetch={refetch}></TopBar>
+          <TopBar
+            isLoading={isLoading}
+            setSearch={setSearch}
+            refetch={refetch}
+          ></TopBar>
           <BillingsTable
             dataPerPage={dataPerPage}
             data={data}
