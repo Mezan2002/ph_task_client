@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
@@ -7,6 +8,7 @@ import Register from "./Components/Register/Register";
 import Main from "./Layout/Main/Main";
 
 function App() {
+  const [user, setUser] = useState(false);
   const router = createBrowserRouter([
     {
       path: "/",
@@ -14,17 +16,17 @@ function App() {
       children: [
         {
           path: "/",
-          element: <Billings></Billings>,
+          element: <Billings user={user}></Billings>,
         },
       ],
     },
     {
       path: "/login",
-      element: <Login></Login>,
+      element: <Login setUser={setUser}></Login>,
     },
     {
       path: "/register",
-      element: <Register></Register>,
+      element: <Register setUser={setUser}></Register>,
     },
   ]);
   return (

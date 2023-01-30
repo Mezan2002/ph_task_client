@@ -6,7 +6,7 @@ const Navbar = () => {
     <div>
       <div className="navbar px-20">
         <div className="navbar-start">
-          <Link to="/" className="btn btn-ghost normal-case text-xl" href="">
+          <Link to="/" className="btn btn-ghost normal-case text-xl">
             Logo
           </Link>
         </div>

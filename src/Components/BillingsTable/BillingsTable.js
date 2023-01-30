@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { toast } from "react-hot-toast";
 import Loading from "../Loading/Loading";
 
@@ -11,9 +11,6 @@ const BillingsTable = ({
   activePage,
   setActivePage,
 }) => {
-  /* const [activePage, setActivePage] = useState(0);
-  const [dataPerPage] = useState(10); */
-
   const billingList = data?.result;
   const numberOfData = data?.count;
   const pagesNeed = Math.ceil(numberOfData / dataPerPage);

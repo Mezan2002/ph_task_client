@@ -1,8 +1,9 @@
 import React from "react";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Register = () => {
+const Register = ({ setUser }) => {
+  const navigate = useNavigate();
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -21,8 +22,19 @@ const Register = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          form.reset();
-          toast.success("User Created Successfully!");
+          fetch(`http://localhost:5000/jwt?email=${email}`, {
+            method: "POST",
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.token) {
+                localStorage.setItem("token", data.token);
+                setUser(true);
+                navigate("/");
+                form.reset();
+                toast.success("User Created Successfully!");
+              }
+            });
         }
       });
   };

@@ -9,7 +9,6 @@ const AddNewBillModal = ({ modalToggle, setModalToggle, refetch }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  console.log(refetch);
   const formSubmit = (data) => {
     const fullName = data.fullName;
     const email = data.email;

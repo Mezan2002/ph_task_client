@@ -2,7 +2,7 @@ import React from "react";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setUser }) => {
   const navigate = useNavigate();
   const handleLogin = (event) => {
     event.preventDefault();
@@ -13,9 +13,19 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data._id) {
-          form.reset();
-          navigate("/");
-          toast.success("Login Successfull!");
+          fetch(`http://localhost:5000/jwt?email=${email}`, {
+            method: "POST",
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.token) {
+                localStorage.setItem("token", data.token);
+                setUser(true);
+                form.reset();
+                navigate("/");
+                toast.success("Login Successfull!");
+              }
+            });
         }
       })
       .catch((err) => {
