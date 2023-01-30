@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AddNewBillModal from "../AddNewBillModal/AddNewBillModal";
 
-const TopBar = () => {
+const TopBar = ({ refetch }) => {
   const [modalToggle, setModalToggle] = useState(true);
   return (
     <div className="bg-black mt-2 rounded-md py-3">
@@ -17,6 +17,7 @@ const TopBar = () => {
         <AddNewBillModal
           modalToggle={modalToggle}
           setModalToggle={setModalToggle}
+          refetch={refetch}
         ></AddNewBillModal>
         <label
           onClick={() => setModalToggle(true)}

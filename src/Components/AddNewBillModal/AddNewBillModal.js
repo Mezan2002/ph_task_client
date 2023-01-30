@@ -2,13 +2,14 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
-const AddNewBillModal = ({ modalToggle, setModalToggle }) => {
+const AddNewBillModal = ({ modalToggle, setModalToggle, refetch }) => {
   const {
     register,
     reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  console.log(refetch);
   const formSubmit = (data) => {
     const fullName = data.fullName;
     const email = data.email;
@@ -31,6 +32,7 @@ const AddNewBillModal = ({ modalToggle, setModalToggle }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
+          refetch();
           reset();
           setModalToggle(false);
           toast.success("Bill added successfully!");

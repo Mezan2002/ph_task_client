@@ -1,21 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import Loading from "../Loading/Loading";
 
-const BillingsTable = ({ setModalToggle, modalPrevData, setModalPrevData }) => {
-  const {
-    data: billingList = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["billing-list"],
-    queryFn: async () => {
-      const res = await fetch("http://localhost:5000/billing-list");
-      const data = await res.json();
-      return data;
-    },
-  });
+const BillingsTable = ({
+  setModalPrevData,
+  data,
+  refetch,
+  isLoading,
+  dataPerPage,
+  activePage,
+  setActivePage,
+}) => {
+  /* const [activePage, setActivePage] = useState(0);
+  const [dataPerPage] = useState(10); */
+
+  const billingList = data?.result;
+  const numberOfData = data?.count;
+  const pagesNeed = Math.ceil(numberOfData / dataPerPage);
+
   const handleDelete = (id) => {
     const procced = window.confirm("Are you want to delete the bill details?");
     if (procced === true) {
@@ -53,7 +55,7 @@ const BillingsTable = ({ setModalToggle, modalPrevData, setModalPrevData }) => {
           <tbody>
             {billingList?.map((bill, i) => (
               <tr key={bill._id}>
-                <th>{i + 1}</th>
+                <th>{bill._id}</th>
                 <td>{bill.fullName}</td>
                 <td>{bill.email}</td>
                 <td>{bill.phone}</td>
@@ -77,6 +79,21 @@ const BillingsTable = ({ setModalToggle, modalPrevData, setModalPrevData }) => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="flex justify-center items-center mt-5">
+        <div className="btn-group">
+          <button className="btn">«</button>
+          {[...Array(pagesNeed).keys()].map((num) => (
+            <button
+              key={num}
+              className={`btn ${activePage === num && "btn-active"}`}
+              onClick={() => setActivePage(num)}
+            >
+              {num + 1}
+            </button>
+          ))}
+          <button className="btn">»</button>
+        </div>
       </div>
     </div>
   );
