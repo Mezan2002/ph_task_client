@@ -12,7 +12,7 @@ const Register = ({ setUser }) => {
     const password = form.password.value;
     const userData = { fullName, email, password };
 
-    fetch("http://localhost:5000/registration", {
+    fetch("https://ph-task-server-sigma.vercel.app/registration", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -22,7 +22,7 @@ const Register = ({ setUser }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          fetch(`http://localhost:5000/jwt?email=${email}`, {
+          fetch(`https://ph-task-server-sigma.vercel.app/jwt?email=${email}`, {
             method: "POST",
           })
             .then((res) => res.json())

@@ -18,7 +18,7 @@ const Billings = ({ user }) => {
     queryKey: ["billing-list", activePage, dataPerPage],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/billing-list?activePage=${activePage}&dataPerPage=${dataPerPage}&search=${search}`,
+        `https://ph-task-server-sigma.vercel.app/billing-list?activePage=${activePage}&dataPerPage=${dataPerPage}&search=${search}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("token")}`,

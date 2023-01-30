@@ -21,7 +21,7 @@ const AddNewBillModal = ({ modalToggle, setModalToggle, refetch }) => {
       payableAmount,
       createdTime: new Date().toISOString(),
     };
-    fetch("http://localhost:5000/add-billing", {
+    fetch("https://ph-task-server-sigma.vercel.app/add-billing", {
       method: "POST",
       headers: {
         "content-type": "application/json",

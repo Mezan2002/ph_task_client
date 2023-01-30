@@ -9,11 +9,13 @@ const Login = ({ setUser }) => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    fetch(`http://localhost:5000/login?email=${email}&password=${password}`)
+    fetch(
+      `https://ph-task-server-sigma.vercel.app/login?email=${email}&password=${password}`
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data._id) {
-          fetch(`http://localhost:5000/jwt?email=${email}`, {
+          fetch(`https://ph-task-server-sigma.vercel.app/jwt?email=${email}`, {
             method: "POST",
           })
             .then((res) => res.json())

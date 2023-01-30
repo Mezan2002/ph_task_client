@@ -18,7 +18,7 @@ const BillingsTable = ({
   const handleDelete = (id) => {
     const procced = window.confirm("Are you want to delete the bill details?");
     if (procced === true) {
-      fetch(`http://localhost:5000/delete-billing/${id}`, {
+      fetch(`https://ph-task-server-sigma.vercel.app/delete-billing/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

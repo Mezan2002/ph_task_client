@@ -7,7 +7,7 @@ const Navbar = () => {
   console.log(total);
 
   useEffect(() => {
-    fetch("http://localhost:5000/billAmount")
+    fetch("https://ph-task-server-sigma.vercel.app/billAmount")
       .then((res) => res.json())
       .then((data) => {
         setBillAmountList(data);

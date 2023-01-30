@@ -11,13 +11,16 @@ const EditBillDetailsModal = ({ modalPrevData, setModalPrevData, refetch }) => {
   } = useForm();
   const formSubmit = (data) => {
     console.log(data);
-    fetch(`http://localhost:5000/update-billing/${modalPrevData._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      `https://ph-task-server-sigma.vercel.app/update-billing/${modalPrevData._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.matchedCount === 1) {
